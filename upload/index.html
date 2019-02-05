@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Upload a file, get a link to share it!</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" media="screen" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+      <link href="//netdna.bootstrapcdn.com/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+      <link href="/static/respondjs/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+      <script src="/static/respondjs/respond.proxy.js"></script>
+    <![endif]-->
+<script src="js/jquery-1.11.2.min.js"></script>
+<link href="css/base.css" media="screen" rel="stylesheet">
+<script type="text/javascript" src="js/upload.js"></script>
+</head>
+<body id="home" class="songs">
+<div id="container">
+<div id="header" class="container-fluid">
+<div class="row">
+<h1><a href="https://picosong.com" class="text-hide">picosong</a></h1>
+<p>upload a file, get a short url to share it!</p>
+</div>
+</div>
+<div id="content" class="container">
+<div id='dropzone'>
+<table>
+<tr>
+<td>
+<h1>Drop your file to upload it!</h1>
+</td>
+</tr>
+</table>
+</div>
+<div id="upload">
+<h2 class="content-title row text-center">Select your audio file:</h2>
+<div id="form-errors" class="row text-center">
+</div>
+<div id="file-selection" class="row">
+<div class="col-xs-1 col-md-2"></div>
+<div class="left col-xs-10 col-sm-5 col-md-4">
+<table>
+<tr>
+<td class="text-center">
+<form accept-charset="UTF-8" action="/upload/" class="new_song" enctype="multipart/form-data" id="fileupload" method="post">
+<input type='hidden' name='csrfmiddlewaretoken' value='FzlXBzK5TiIjImXbOdyDiVBkfeY69sA6' />
+<div class='btn btn-file btn-lg btn-success'>
+<i class='fa fa-upload'></i>
+Select File
+<input id="song_file" name="file" type="file" accept=".mp3">
+</div>
+<noscript>
+              <button class='btn btn-lg' type='submit'>Upload!</button>
+            </noscript>
+</form>
+<noscript>
+            <small><a href="http://www.enable-javascript.com/" target="_blank">Turn on javascript</a> for the enhanced uploader!</small>
+          </noscript>
+<small>Maximum size is 1GB.</small>
+<small class='text-muted'>(zip or rar files only)</small>
+</td>
+</tr>
+</table>
+</div>
+<div class='middle hidden-xs col-sm-1 text-center'>
+<table>
+<tr>
+<td class="text-center">
+<h3>or</h3>
+</td>
+</tr>
+</table>
+</div>
+<div class="right hidden-xs col-sm-4 col-md-3">
+<table>
+<tr>
+<td class="text-center">
+<div class='inner text-muted'>
+<!--[if gte IE 10 | !IE ]><!-->
+<i class='fa fa-cloud-upload fa-5x'></i>
+<p>
+Drag and drop files anywhere on this page.
+</p>
+<![endif]-->
+<!--[if lt IE 10]>
+              <i class='fa fa-long-arrow-left'></i>
+              <p>
+              <p>
+                Unfortunately, drag and drop is not supported by your
+                browser. Use the upload button instead!
+              </p>
+              <![endif]-->
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="col-xs-1 col-md-2"></div>
+</div>
+</div>
+<div id="uploading">
+<h2 class="row text-center">Your file is uploading:</h2>
+<div class="row text-center">
+<div class="col-xs-1 col-sm-2"></div>
+<div class="left col-xs-10 col-sm-8">
+<p class="filename"></p>
+<a id="select-another" href='#'>Wrong file? Click here to select another.</a>
+<div id="progressbar" class="progress progress-striped active">
+<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+<span class="sr-only">0% Complete</span>
+</div>
+<!--[if lte IE 9]>
+        <img src="//cdnjs.cloudflare.com/ajax/libs/webshim/1.12.7/dev/shims/styles/progress.gif" width="100%">
+        <![endif]-->
+</div>
+<small>
+<span id="progressinfo">
+
+</span>
+<strong>Please wait, your upload is starting...</strong>
+</small>
+</div>
+<div class="col-xs-1 col-sm-2"></div>
+</div>
+</div>
+<div id="agreement" class="row text-center">
+<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+<p>By uploading files, you agree to both our <a href="/aup/">AUP</a> and <a href="/tos/">TOS</a>. You represent and warrant that you own all rights
+necessary to make content available through picosong.</p>
+</div>
+</div>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.5.3/numeral.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="/static/javascripts/jquery.fileupload-validate.mod.js"></script>
+</div>
+<div id="footer" class="container text-center small">
+<div class="row">
+<a href="mailto: admin@streethiphop.org">Contact Us</a> &#8226;
+<a href="https://www.facebook.com/Ostreethiphop/" target="_blank">Like/Follow us on Facebook!</a> &#8226;
+<a href="https://discord.gg/2MfspqN" target="_blank">Join our Discord!</a> &#8226;
+<a href="pages/tos.html">Terms of Service</a> &#8226;
+<a href="pages/dmca/">DMCA</a> &#8226;
+<a href="/privacy/">Privacy Policy</a>
+</div>
+</div>
+</div> 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3364070-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-3364070-3');
+</script>
+</body>
+</html>
